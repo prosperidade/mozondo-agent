@@ -1,9 +1,19 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from agents import Runner
 from src.agent import build_agent
 
 app = FastAPI()
+
+# ✅ LIBERAR CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # depois podemos restringir só pro seu domínio
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 agent = build_agent()
 
